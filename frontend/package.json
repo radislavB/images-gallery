@@ -18,7 +18,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint":"eslint src/**/*.js"
+    "lint": "eslint \"./src/**/*.{js,jsx}\"",
+    "lint-fix": "eslint \"./src/**/*.{js,jsx}\" --fix"
+
   },
   "eslintConfig": {
     "extends": [
@@ -27,9 +29,17 @@
       "plugin:prettier/recommended"
     ]
   },
-  "prettier":{
-    "endOfLine": "auto"
-  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+ },
+"prettier": {
+  "singleQuote": true
+},
   "browserslist": {
     "production": [
       ">0.2%",
