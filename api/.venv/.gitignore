@@ -1,0 +1,6 @@
+# created by virtualenv automatically
+*
+
+#ignore everything except several specific files
+!.gitignore
+!.gitkeep
