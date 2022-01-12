@@ -10,6 +10,9 @@ python-dotenv = "==0.15.0"
 flask-cors = "==3.0.10"
 
 [dev-packages]
+black = "==21.12b0"
+pylint = "==2.12.2"
+pycodestyle = "*"
 
 [requires]
 python_version = "3.10"
