@@ -18,6 +18,11 @@ CORS(app)
 app.config["DEBUG"] = DEBUG
 
 
+@app.route("/")
+def root_message():
+    return "Hello from API app"
+
+
 @app.route("/new_image")
 def new_image():
     word = request.args.get("query")
@@ -29,4 +34,4 @@ def new_image():
 
 
 if __name__ == "__main__":
-    app.run(port=5050)
+    app.run(host="0.0.0.0", port=5050)
