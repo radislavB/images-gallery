@@ -14,7 +14,7 @@ const App = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    fetch(`${API_URL}/new-image?query=${word}`)
+    fetch(`${API_URL}/new_image?query=${word}`)
       .then((res) => res.json())
       .then((data) => {
         setImages([{ ...data, title: word }, ...images]);
