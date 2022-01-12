@@ -1,28 +1,26 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
-import Header from './Components/Header';
-import ImageCardList from './Components/ImageCardList';
-import Search from './Components/Search';
-import Welcome from './Components/Welcome';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './components/Header';
+import Search from './components/Search';
+import ImageCard from './components/ImageCard';
+import Welcome from './components/Welcome';
+import { Container, Row, Col } from 'react-bootstrap';
+
+const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050';
 
 const App = () => {
   const [word, setWord] = useState('');
   const [images, setImages] = useState([]);
 
   const handleSearchSubmit = (e) => {
-    e.preventDefault(e);
-
-    const API_URL = 'http://127.0.0.1:5050';
-    const url =
-      process.env.REACT_APP_API_URL || `${API_URL}/new_image?query=${word}`;
-    fetch(url)
+    e.preventDefault();
+    fetch(`${API_URL}/new-image?query=${word}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log('data', data);
         setImages([{ ...data, title: word }, ...images]);
       })
       .catch((err) => {
-        console.log('err to fetch', err);
+        console.log(err);
       });
     setWord('');
   };
@@ -33,13 +31,21 @@ const App = () => {
 
   return (
     <div>
-      <Header title="Images gallery header" />
+      <Header title="Images Gallery" />
       <Search word={word} setWord={setWord} handleSubmit={handleSearchSubmit} />
-      {images.length ? (
-        <ImageCardList images={images} handleDeleteImage={handleDeleteImage} />
-      ) : (
-        <Welcome />
-      )}
+      <Container className="mt-4">
+        {images.length ? (
+          <Row xs={1} md={2} lg={3}>
+            {images.map((image, i) => (
+              <Col key={i} className="pb-3">
+                <ImageCard image={image} deleteImage={handleDeleteImage} />
+              </Col>
+            ))}
+          </Row>
+        ) : (
+          <Welcome />
+        )}
+      </Container>
     </div>
   );
 };

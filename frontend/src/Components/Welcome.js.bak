@@ -10,7 +10,7 @@ const Welcome = () => (
     </p>
     <p>
       <Button variant="primary" href="https://unsplash.com" target="_blank">
-        Learn more
+        Learn more 3
       </Button>
     </p>
   </Jumbotron>

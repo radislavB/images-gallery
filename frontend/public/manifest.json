@@ -1,6 +1,6 @@
 {
-  "name": "Image Gallery",
-  "short_name": "IG",
+  "name": "Images Gallery",
+  "short_name": "Images Gallery",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

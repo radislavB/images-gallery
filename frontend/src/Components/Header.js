@@ -1,14 +1,16 @@
 import React from 'react';
 import { Navbar, Container } from 'react-bootstrap';
-import { ReactComponent as Logo } from '../images/ImagesGallery.svg';
+import { ReactComponent as Logo } from '../images/logo.svg';
+
 const navbarStyle = {
-  backgroundColor: 'lightblue',
+  backgroundColor: '#eeeeee',
 };
+
 const Header = ({ title }) => {
   return (
     <Navbar style={navbarStyle} variant="light">
       <Container>
-        <Logo alt={title} style={{ maxWidth: '10rem', maxHeight: '4rem' }} />
+        <Logo alt={title} style={{ maxWidth: '12rem', maxHeight: '2rem' }} />
       </Container>
     </Navbar>
   );

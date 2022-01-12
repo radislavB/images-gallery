@@ -9,6 +9,6 @@ docker build . -t images-gallery-frontend
 docker run -p 3000:3000 --name front1  images-gallery-frontend 
 docker exec -it front1  sh 
 
-**************Docker Compose
+**************Docker Compose 
 docker compose up -d
 docker compose down
