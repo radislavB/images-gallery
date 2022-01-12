@@ -1,0 +1,14 @@
+
+***********Start API
+docker build . -t images-gallery-api 
+docker run -p 5050:5050 --name api1 images-gallery-api 
+docker exec -it api1  bash
+
+************Start Frontend
+docker build . -t images-gallery-frontend 
+docker run -p 3000:3000 --name front1  images-gallery-frontend 
+docker exec -it front1  sh 
+
+**************Docker Compose
+docker compose up -d
+docker compose down
