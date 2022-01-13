@@ -46,10 +46,19 @@ def images():
         print("post images")
         image = request.get_json()
         image["_id"] = image["id"]
-        
+
         result = mongo_client.save_images(image)
         inserted_id = result.inserted_id
         return {"inserted_id": inserted_id}
+
+
+@app.route("/images/<id>", methods=["DELETE"])
+def delete_image(id):
+    result = mongo_client.delete_image(id)
+    if result.deleted_count:
+        return {"deleted_id": id}
+    else:
+        return {"error": "Image not found"}, 404
 
 
 if __name__ == "__main__":

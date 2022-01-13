@@ -23,14 +23,19 @@ images_collection = gallery.images
 
 
 def get_images():
-    ''' get images from mongo'''
+    """get images from mongo"""
     images = images_collection.find({})
     return [img for img in images]
 
 
 def save_images(image_json):
-    '''save images'''
+    """save images"""
     return images_collection.insert_one(image_json)
+
+
+def delete_image(image_id):
+    """delete images"""
+    return images_collection.delete_one({"id": image_id})
 
 
 def insert_test_document():
