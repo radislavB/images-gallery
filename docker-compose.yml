@@ -1,7 +1,7 @@
 version: '3'
 services:
   frontend:
-    #restart: always
+    restart: always
     build: ./frontend
     ports:
       - '3000:3000'
@@ -11,7 +11,7 @@ services:
     environment: 
       - CHOKIDAR_USEPOLLING=true
   api:
-    #restart: always
+    restart: always
     build: ./api
     ports:
       - '5050:5050'
@@ -19,7 +19,7 @@ services:
       - ./api:/app
   mongo:
     image: mongo
-    #restart: always
+    restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
@@ -27,7 +27,7 @@ services:
       - mongodb_data:/data/db
   mongo-express:
     image: mongo-express
-    #restart: always
+    restart: always
     ports:
       - 8081:8081
     environment:

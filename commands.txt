@@ -17,4 +17,4 @@ docker exec -it front1  sh
 **************Docker Compose 
 docker compose up -d
 docker compose down
-docker compose up --build -d api  : up and rebuild only "api"  containers
+docker compose up --build -d frontend  : up and rebuild only "frontend"  containers
