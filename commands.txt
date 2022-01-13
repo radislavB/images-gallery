@@ -1,7 +1,12 @@
+************
+add dependencies to api from https://pypi.org/
+pipenv install pymongo==4.0.1
+
 
 ***********Start API
 docker build . -t images-gallery-api 
 docker run -p 5050:5050 --name api1 images-gallery-api 
+docker run -p 5050:5050 images-gallery-api 
 docker exec -it api1  bash
 
 ************Start Frontend
@@ -12,3 +17,4 @@ docker exec -it front1  sh
 **************Docker Compose 
 docker compose up -d
 docker compose down
+docker compose up --build -d api  : up and rebuild only "api"  containers

@@ -3,6 +3,7 @@ import requests
 from flask import Flask, request
 from dotenv import load_dotenv
 from flask_cors import CORS
+from mongo_client import insert_test_document
 
 load_dotenv(dotenv_path="./.env.local")
 UNSPLASH_URL = "https://api.unsplash.com/photos/random"
@@ -17,14 +18,17 @@ app = Flask(__name__)
 CORS(app)
 app.config["DEBUG"] = DEBUG
 
+insert_test_document()
 
 @app.route("/")
 def root_message():
+    ''' welcome message '''
     return "Hello from API app"
 
 
 @app.route("/new_image")
 def new_image():
+    ''' get new random image data '''
     word = request.args.get("query")
     params = {"query": word}
     headers = {"Authorization": "Client-ID " + UNSPLASH_KEY, "Accept-Version": "v1"}
