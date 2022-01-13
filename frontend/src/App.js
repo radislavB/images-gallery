@@ -6,12 +6,14 @@ import ImageCard from './components/ImageCard';
 import Welcome from './components/Welcome';
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import Spinner from './components/Spinner';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050';
 
 const App = () => {
   const [word, setWord] = useState('');
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getSavedImages = async () => {
     try {
@@ -19,6 +21,8 @@ const App = () => {
       setImages(res.data || []);
     } catch (error) {
       console.log('Failed to fetch images', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,9 +71,8 @@ const App = () => {
     }
   };
 
-  return (
-    <div>
-      <Header title="Images Gallery" />
+  const seach_and_container = (
+    <>
       <Search word={word} setWord={setWord} handleSubmit={handleSearchSubmit} />
       <Container className="mt-4">
         {images.length ? (
@@ -88,6 +91,13 @@ const App = () => {
           <Welcome />
         )}
       </Container>
+    </>
+  );
+
+  return (
+    <div>
+      <Header title="Images Gallery" />
+      {loading ? <Spinner /> : seach_and_container}
     </div>
   );
 };
