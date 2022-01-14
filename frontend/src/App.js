@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import Search from './components/Search';
 import ImageCard from './components/ImageCard';
@@ -7,6 +8,7 @@ import Welcome from './components/Welcome';
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import Spinner from './components/Spinner';
+import { ToastContainer, toast } from 'react-toastify';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050';
 
@@ -20,6 +22,7 @@ const App = () => {
       const res = await axios.get(`${API_URL}/images`);
       setImages(res.data || []);
       console.log('loaded images', res.data);
+      toast.success('Saved images downloaded');
     } catch (error) {
       console.log('Failed to fetch images', error);
     } finally {
@@ -35,6 +38,7 @@ const App = () => {
     try {
       const res = await axios.get(`${API_URL}/new_image?query=${word}`);
       setImages([{ ...res.data, title: word }, ...images]);
+      toast.info(`New image ${word.toUpperCase()} was found`);
     } catch (error) {
       console.log('Failed to fetch image', error);
     }
@@ -43,15 +47,17 @@ const App = () => {
   };
 
   const handleDeleteImage = async (id) => {
+    const imageToDelete = images.find((image) => image.id === id);
     try {
-      const imageToDelete = images.find((image) => image.id === id);
       if (imageToDelete.saved) {
         const deleted = await axios.delete(`${API_URL}/images/${id}`);
         console.log('image deleted from db ', deleted);
       }
       setImages(images.filter((image) => image.id !== id));
+      toast.info(`Image ${imageToDelete.title} was deleted`);
     } catch (error) {
       console.log('Failed to delete image', error);
+      toast.error(`Failed to delete image ${imageToDelete.title} : ${error}`);
     }
   };
 
@@ -66,6 +72,7 @@ const App = () => {
           image.id === id ? { ...image, saved: true } : image
         );
         setImages(newImages);
+        toast.info(`Image ${imageToSave.title} was saved`);
       }
     } catch (error) {
       console.log('Failed to save image', error);
@@ -99,6 +106,7 @@ const App = () => {
     <div>
       <Header title="Images Gallery" />
       {loading ? <Spinner /> : seach_and_container}
+      <ToastContainer position="bottom-right"></ToastContainer>
     </div>
   );
 };
