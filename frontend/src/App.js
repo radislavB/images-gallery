@@ -19,6 +19,7 @@ const App = () => {
     try {
       const res = await axios.get(`${API_URL}/images`);
       setImages(res.data || []);
+      console.log('loaded images', res.data);
     } catch (error) {
       console.log('Failed to fetch images', error);
     } finally {
